@@ -2,7 +2,7 @@ const router = require('express').Router();
 const multer = require('multer');
 const fs = require('fs');
 
-const imageUploadPath = '/var/www/fileUpload/media/images';
+const imageUploadPath = '/var/www/fileUpload/media';
 // const imageUploadPath = 'assets/images';
 
 const storage = multer.diskStorage({

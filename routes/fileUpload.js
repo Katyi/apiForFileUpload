@@ -2,8 +2,8 @@ const router = require('express').Router();
 const multer = require('multer');
 const fs = require('fs');
 
-// const imageUploadPath = '/var/www/mern-ecommerce-app/uploaded_files/images';
-const imageUploadPath = 'assets/images';
+const imageUploadPath = '/var/www/fileUpload/media/images';
+// const imageUploadPath = 'assets/images';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

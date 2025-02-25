@@ -3,14 +3,9 @@ const app = express();
 const fileUploadRoute = require('./routes/fileUpload');
 const testRoute = require('./routes/test');
 const cors = require('cors');
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true,
-  optionSuccessStatus: 200,
-};
 
 // Middleware
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 // Routes

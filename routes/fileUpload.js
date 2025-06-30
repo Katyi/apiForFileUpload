@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const multer = require('multer');
 const fs = require('fs');
+const sizeOf = require('image-size');
 
 const imageUploadPath = '/var/www/fileUpload/uploaded_files/media';
 // const imageUploadPath = 'assets/images';
@@ -18,12 +19,18 @@ const upload = multer({ storage: storage });
 
 router.post('/image-upload', upload.single('file'), (req, res) => {
   const fileName = req.file.filename;
+  const filePath = `${imageUploadPath}/${fileName}`;
   try {
-    res
-      .status(200)
-      .json({ message: `File uploaded successfully: ${fileName}` });
+    const dimensions = sizeOf(filePath);
+    console.log(dimensions)
+    res.status(200).json({
+      message: `File uploaded successfully: ${fileName}`,
+      width: dimensions.width,
+      height: dimensions.height,
+      fileName,
+    });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 

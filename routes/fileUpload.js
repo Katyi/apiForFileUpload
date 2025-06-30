@@ -4,6 +4,8 @@ const fs = require('fs');
 const sizeOf = require('image-size');
 
 const imageUploadPath = '/var/www/fileUpload/uploaded_files/media';
+
+// For local testing
 // const imageUploadPath = 'assets/images';
 
 const storage = multer.diskStorage({
@@ -21,8 +23,9 @@ router.post('/image-upload', upload.single('file'), (req, res) => {
   const fileName = req.file.filename;
   const filePath = `${imageUploadPath}/${fileName}`;
   try {
-    const dimensions = sizeOf(filePath);
-    console.log(dimensions)
+    const fileBuffer = fs.readFileSync(filePath);
+    const dimensions = sizeOf.default(fileBuffer);
+    // console.log(dimensions.width, dimensions.height);
     res.status(200).json({
       message: `File uploaded successfully: ${fileName}`,
       width: dimensions.width,
